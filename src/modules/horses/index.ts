@@ -1,0 +1,5 @@
+export * from './store/horses.store'
+export * from './horses.types'
+export { default as HorseList } from './ui/horse-list/HorseList.vue'
+export { default as HorseSvg } from './ui/horse-svg/HorseSvg.vue'
+export { CONDITION_MIN, CONDITION_MAX, HORSE_COUNT } from './horses.const'

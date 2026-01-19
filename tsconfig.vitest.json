@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.app.json",
+  "include": [
+    "src/**/__tests__/*",
+    "env.d.ts",
+    "src/components/layout/header-bar",
+    "src/modules/session/ui/generate-program-button",
+    "src/modules/horses/ui/horse-list",
+    "src/modules/race/ui/start-stop-button",
+    "src/modules/race/utils/race-generator/raceGenerator.spec.ts",
+    "src/composables/use-state-machine/useStateMachine.spec.ts",
+    "src/modules/race/composables/use-race-animation/useRaceAnimation.spec.ts",
+    "src/modules/race/ui/race-track",
+    "src/modules/race/ui/race-program",
+    "src/modules/horses/store/horses.store.spec.ts",
+    "src/modules/race/store/races.store.spec.ts",
+    "src/modules/session/store/session.store.spec.ts",
+    "src/modules/race/store/session-races.integration.spec.ts",
+    "src/modules/race/store/lifecycle.spec.ts",
+    "src/modules/session/store/regenerate.integration.spec.ts"
+  ],
+  "exclude": [],
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
+
+    "lib": [],
+    "types": ["node", "jsdom"]
+  }
+}
