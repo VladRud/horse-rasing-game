@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useSessionStore } from '@/modules/session'
-import { Button } from '@/shared/ui/button'
+import { SessionStatus, useSessionStore } from '@/modules/session'
+import { Button, type ButtonVariants } from '@/shared/ui/button'
+import { computed } from 'vue'
 
 const sessionStore = useSessionStore()
 
@@ -12,10 +13,31 @@ const handleGenerateProgram = () => {
 
   sessionStore.startSession()
 }
+const buttonStatesMap = computed(() => ({
+  [SessionStatus.Idle]: {
+    label: 'Generate Program',
+    variant: 'success',
+    click: sessionStore.startSession,
+  },
+  [SessionStatus.Initialized]: {
+    label: 'Regenerate Program',
+    variant: 'secondary',
+    click: sessionStore.restartSession,
+  },
+  [SessionStatus.Completed]: {
+    label: 'Regenerate Program',
+    variant: 'success',
+    click: sessionStore.restartSession,
+  },
+}))
 </script>
 
 <template>
-  <Button variant="secondary" data-aqa="generate-program" @click="handleGenerateProgram">
-    Generate Program
+  <Button
+    :variant="buttonStatesMap[sessionStore.sessionStatus].variant as ButtonVariants['variant']"
+    data-aqa="generate-program"
+    @click="handleGenerateProgram"
+  >
+    {{ buttonStatesMap[sessionStore.sessionStatus].label }}
   </Button>
 </template>

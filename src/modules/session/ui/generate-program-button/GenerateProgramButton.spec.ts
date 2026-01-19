@@ -51,6 +51,6 @@ describe('GenerateProgramButton', () => {
 
     expect(restartSpy).toHaveBeenCalledTimes(1)
     expect(startSpy).not.toHaveBeenCalled()
-    expect(wrapper.text()).toContain('Generate Program')
+    expect(wrapper.text()).toContain('Regenerate Program')
   })
 })

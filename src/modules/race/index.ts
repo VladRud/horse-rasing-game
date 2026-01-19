@@ -6,4 +6,5 @@ export { default as RoundParticipants } from './ui/race-participants/RoundPartic
 export { default as StartStopButton } from './ui/start-stop-button/StartStopButton.vue'
 export { useRaceAnimation } from './composables/use-race-animation/useRaceAnimation'
 export { generateRaceSchedule } from './utils/race-generator/raceGenerator'
+export { useProgram } from './composables/use-program/useProgram'
 export { ROUND_COUNT, HORSES_PER_ROUND, ROUND_DISTANCES } from './races.const'
