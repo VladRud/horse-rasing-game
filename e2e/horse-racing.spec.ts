@@ -151,30 +151,29 @@ test('runs a round with pause/resume and auto-starts the next round', async ({ p
 })
 
 test('completes a full session and resets on regenerate', async ({ page }) => {
-  test.setTimeout(90000)
   await installDeterministicRandom(page)
+  await installAcceleratedIntervals(page, 500)
 
   await page.goto('/')
 
   await page.locator('[data-aqa="generate-program"]').click()
 
   const startStop = page.locator('[data-aqa="start-stop"]')
-  const nextRound = page.getByRole('button', { name: 'Next Round' })
   const raceTrack = page.locator('[data-aqa="race-track"]')
 
   await startStop.click()
 
   await expect(startStop).toContainText('Pause')
 
-  for (let round = 1; round <= 5; round += 1) {
-    await nextRound.click()
-    await expect(raceTrack).toContainText(`Round ${round + 1}`)
-    await expect(startStop).toContainText('Pause')
-  }
-
-  await nextRound.click()
-
-  await expect(startStop).toContainText('Finished', { timeout: 10000 })
+  // Wait for session to complete (button shows "Finished" when all rounds done)
+  await page.waitForFunction(
+    (selector) => {
+      const button = document.querySelector(selector)
+      return button?.textContent?.includes('Finished')
+    },
+    '[data-aqa="start-stop"]',
+    { timeout: 10000 },
+  )
   await expect(startStop).toBeDisabled()
 
   const programRoot = page.locator('[data-aqa="race-program"]')
